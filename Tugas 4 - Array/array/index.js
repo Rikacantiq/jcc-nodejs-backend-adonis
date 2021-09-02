@@ -22,7 +22,7 @@ switch(args[2]){
         break;
     default:
         console.log(`
-        List Perintah
+        List Perintah:
         1. node array range <startNum> <finishNum>
         2. node array rangeWithStep <startNum> <finishNum> <step> (default step = 1)
         3. node array sum <startNum> <finishNum> <step> (default step = 1)

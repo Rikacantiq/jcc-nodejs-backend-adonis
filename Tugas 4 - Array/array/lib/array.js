@@ -86,7 +86,6 @@ function dataHandling(input) {
 
 function balikKata(kata){
     var arr = [kata];
-    var i = arr[0].length;
     var out = ""
 
     for(i = arr[0].length ; i >= 0; i--){
