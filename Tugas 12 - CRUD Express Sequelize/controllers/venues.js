@@ -20,17 +20,22 @@ class VenuesController {
 
 	static async updateById(req, res) {
 		const id = req.params.id;
-		const { name, address, phone } = req.body;
-		if (name) {
-			await Venues.update({ name }, { where: { id } });
-		}
-		if (address) {
-			await Venues.update({ address }, { where: { id } });
-		}
-		if (phone) {
-			await Venues.update({ phone }, { where: { id } });
-		}
-		res.status(201).json({ status: 'success' });
+        const cekData = await Venues.findAll({ where: { id } });
+        const { name, address, phone } = req.body;
+        if (cekData.length === 0){
+            res.status(200).json({ status: 'failed', message: 'Data not found' });
+        } else {
+            if (name) {
+                await Venues.update({ name }, { where: { id } });
+            }
+            if (address) {
+                await Venues.update({ address }, { where: { id } });
+            }
+            if (phone) {
+                await Venues.update({ phone }, { where: { id } });
+            }
+            res.status(201).json({ status: 'success' });
+        } 
 	}
 
 	static async deleteById(req, res) {
