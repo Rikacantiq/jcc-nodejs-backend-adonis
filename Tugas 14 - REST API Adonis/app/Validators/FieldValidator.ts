@@ -1,7 +1,7 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CreateVenueValidator {
+export default class FieldValidator {
   constructor (protected ctx: HttpContextContract) {
   }
 
@@ -24,15 +24,14 @@ export default class CreateVenueValidator {
 	 *     ])
 	 *    ```
 	 */
-  public schema = schema.create({
-	name: schema.string({}, [
-		rules.minLength(4)
-	]),
-	address: schema.string(),
-	phone: schema.string({}, [
-		rules.mobile({ strict: true })
-	])
-  })
+	public schema = schema.create({
+		name: schema.string({}, [
+			rules.minLength(4)
+		]),
+		type: schema.enum(
+			['futsal','mini soccer','basketball']
+		),
+	})
 
 	/**
 	 * Custom messages for validation failures. You can make use of dot notation `(.)`

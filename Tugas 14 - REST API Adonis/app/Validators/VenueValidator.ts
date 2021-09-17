@@ -1,7 +1,7 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CreateBookingValidator {
+export default class VenueValidator {
   constructor (protected ctx: HttpContextContract) {
   }
 
@@ -24,23 +24,15 @@ export default class CreateBookingValidator {
 	 *     ])
 	 *    ```
 	 */
-	public schema = schema.create({
-		name: schema.string(),
-		venueName: schema.string(),
-		bookingDate: schema.date({
-			format: 'dd-MM-yyyy HH:mm'
-		}, [
-			/**
-			 * boleh booking 1 hari sebelum itu maksudnya?
-			 * boleh booking after 24 hours?
-			 * rules.after(24,'hours')
-			 * atau
-			 * boleh booking after today?
-			 * rules.after('today')
-			 */
-			rules.after('today')
-		])
-	})
+  public schema = schema.create({
+	  name: schema.string({}, [
+		  rules.minLength(4)
+	  ]),
+	  address: schema.string(),
+	  phone: schema.string({}, [
+		  rules.mobile({ strict: true })
+	  ])
+  })
 
 	/**
 	 * Custom messages for validation failures. You can make use of dot notation `(.)`
