@@ -24,8 +24,8 @@ export default class MoviesController {
       }),
       genre_id: schema.number()
     })
+    await request.validate({ schema: storeSchema })
     try {
-      await request.validate({ schema: storeSchema })
       await Database.table('movies').returning('id').insert({
         title: request.input('title'),
         resume: request.input('resume'),
